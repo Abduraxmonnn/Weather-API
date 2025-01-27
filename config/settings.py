@@ -30,7 +30,8 @@ THIRD_PART_APPS = [
 ]
 
 LOCAL_APPS = [
-    'apps.user'
+    'apps.user',
+    'apps.color_codes'
 ]
 
 INSTALLED_APPS = [
