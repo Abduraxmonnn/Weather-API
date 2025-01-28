@@ -1,0 +1,1 @@
+from apps.weather.serializers.wether_list import WeatherListSerializer

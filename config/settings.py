@@ -31,7 +31,8 @@ THIRD_PART_APPS = [
 
 LOCAL_APPS = [
     'apps.user',
-    'apps.color_codes'
+    'apps.color_codes',
+    'apps.weather'
 ]
 
 INSTALLED_APPS = [

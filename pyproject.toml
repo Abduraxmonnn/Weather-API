@@ -12,6 +12,7 @@ djangorestframework = "^3.15.2"
 requests = "^2.32.3"
 celery = {extras = ["redis"], version = "^5.4.0"}
 django-celery-beat = "^2.7.0"
+uuid = "^1.30"
 
 
 [tool.poetry.group.dev.dependencies]

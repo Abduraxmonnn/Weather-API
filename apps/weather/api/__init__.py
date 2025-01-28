@@ -1,0 +1,1 @@
+from apps.weather.api.weather_list import WeatherListViewSet

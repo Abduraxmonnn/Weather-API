@@ -562,6 +562,16 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
+name = "uuid"
+version = "1.30"
+description = "UUID object and generation functions (Python 2.3 or higher)"
+optional = false
+python-versions = "*"
+files = [
+    {file = "uuid-1.30.tar.gz", hash = "sha256:1f87cc004ac5120466f36c5beae48b4c48cc411968eed0eaecd3da82aa96193f"},
+]
+
+[[package]]
 name = "vine"
 version = "5.1.0"
 description = "Python promises."
@@ -586,4 +596,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "3a04a024bec30046b0b27bbaa5130fab7abe4eb4e07176b20948dd5752584c1b"
+content-hash = "a23728908bdfe89daab5e68157fd915a61f5ef4d6e69f5fdc42acdecb9ad4615"
