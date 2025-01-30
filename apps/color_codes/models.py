@@ -3,6 +3,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+# Project
+from apps.color_codes.manager import ColorCodesManager
+
 
 class ColorCodes(models.Model):
     class ColorCategory(models.TextChoices):
@@ -17,9 +20,7 @@ class ColorCodes(models.Model):
     temp_name = models.CharField(max_length=255, blank=True, null=True)
     hex_code = models.CharField(max_length=100)
 
-    def get_color_code(self, value):
-        color_code = self.objects.filter(start_point__lte=value, end_point__gte=value).first()
-        return color_code
+    objects = ColorCodesManager()
 
     def __str__(self):
         return self.name
