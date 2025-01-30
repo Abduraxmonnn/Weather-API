@@ -20,4 +20,4 @@ class WeatherListSerializer(serializers.ModelSerializer):
 
 
 class MultipleWeathersListSerializer(serializers.ModelSerializer):
-    countries = serializers.ListSerializer(child=serializers.CharField())
+    regions = serializers.ListSerializer(child=serializers.CharField())
