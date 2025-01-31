@@ -17,4 +17,4 @@ class RegionAdmin(admin.ModelAdmin):
 
 @admin.register(CityWeather)
 class CityWeatherAdmin(admin.ModelAdmin):
-    list_display = ['id', 'country__name']
+    list_display = ['id', 'country__name', 'region__name', 'temp', 'wind', 'cloud', 'created_date', 'last_updated']
