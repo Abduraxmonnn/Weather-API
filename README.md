@@ -17,100 +17,20 @@ weather data for various countries. **Flower** is also used for monitoring Celer
 
 ---
 
-## Production Product
+## Production Release
 
 ### Project URL
 
-You can access the project at the following link:  
 [Project URL](https://yyx9kq-8000.csb.app/)
 
 ### Flower URL
 
-For monitoring and managing the application with Flower, use this link:  
 [Flower URL](https://yyx9kq-5001.csb.app/)
 
-## Clone Project
+To access the Django admin panel, use:
 
-To get started, clone the repository:
-
-```bash
-git clone https://github.com/Abduraxmonnn/Weather-API.git
-cd Weather-API
-```
-
----
-
-## Requirements Before Running
-
-- **Redis**: Celery requires Redis to be installed for message brokering. You can follow the
-  official [Redis installation guide](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/) for
-  your platform.
-
----
-
-## API Key Setup
-
-To securely store and use your API key for a third-party weather service (e.g., WeatherAPI), follow these steps:
-
-1. **Create a `.env` file**  
-   In the root directory of your project (where `manage.py` is located), create a file named `.env`.
-
-2. **Add your API key**  
-   Open the `.env` file and add the following line:
-
-   ```plaintext
-   WEATHER_API_KEY=your_api_key_here
-   ```
-
----
-
-## Setup the Project
-
-### Installation Instructions
-
-1. **Linux**:
-
-   ```bash
-   virtualenv -p /usr/bin/python3 .venv
-   source .venv/bin/activate
-   pip install -r requirements.txt
-   python manage.py migrate
-   ```
-
-2. **Windows**:
-
-   ```bash
-   python -m venv ./venv
-   venv\Scripts\activate
-   pip install -r requirements.txt
-   python manage.py migrate
-   ```
-
-3. **MacOS**:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   python manage.py migrate
-   ```
-
----
-
-## Advanced Setup
-
-For advanced users, you can use **[Poetry](https://python-poetry.org/)** for managing dependencies and virtual
-environments:
-
-1. Install dependencies with Poetry:
-   ```bash
-   poetry install
-   ```
-
-2. Activate the Poetry environment:
-   ```bash
-   poetry shell
-   ```
+- **Username**: `admin`
+- **Password**: `admin123`
 
 ---
 
@@ -118,7 +38,7 @@ environments:
 
 ### 1. **Sign Up**
 
-### `POST /api/v1/user/sign/up/`
+**POST** `/api/v1/user/sign/up/`
 
 This endpoint allows users to sign up for a new account. You need to provide the user's data in the request body.
 
@@ -161,7 +81,7 @@ This endpoint allows users to sign up for a new account. You need to provide the
 
 ### 2. **Sign In**
 
-### `POST /api/v1/user/sign/in/`
+**POST** `/api/v1/user/sign/in/`
 
 This endpoint allows users to sign in to their account and receive a token.
 
@@ -202,7 +122,7 @@ This endpoint allows users to sign in to their account and receive a token.
 
 ## Weather Endpoints
 
-### `GET /weather/`
+**GET** `/weather/`
 
 - **Description**: Retrieves a list of weather data for all available regions.
 
@@ -239,7 +159,7 @@ This endpoint allows users to sign in to their account and receive a token.
 
 ---
 
-### `GET /weather/retrieve/`
+**GET** `/weather/retrieve/`
 
 - **Description**: Retrieves weather data for specific regions. Use the `region` query parameter to specify one or more
   regions.
@@ -294,7 +214,7 @@ This endpoint allows users to sign in to their account and receive a token.
 
 ---
 
-### `POST /weather/retrieve-multiple/`
+**POST** `/weather/retrieve-multiple/`
 
 - **Description**: Retrieves weather data for multiple regions in a single request. Pass a list of regions in the
   request body.
@@ -357,90 +277,101 @@ This endpoint allows users to sign in to their account and receive a token.
 
 ---
 
-## Additional Notes
+<details>
+  <summary style="font-size: 1.5em; font-weight: bold;"><strong>Setup Instructions</strong></summary>
 
-- The weather data and color codes are fetched from the database. Ensure your database is populated with weather and
-  color code data.
+## Clone Project
 
-- The `get_weather_data_service()` function fetches the weather data for a given region from a third-party service or
-  another internal source.
-  Sure! Here's the updated **Additional Notes** section with your cron job instructions added:
+To get started, clone the repository:
 
-- **Weather Data Fetching Task**:
-    - The weather data fetching task (`save_weather_data_in_db`) is scheduled using **Celery** and **Cron Jobs**.
-    - By default, the task is set to run **once every day at midnight** (00:00) using a **Cron Job**. This is configured
-      with the following code:
+```bash
+git clone https://github.com/Abduraxmonnn/Weather-API.git
+cd Weather-API
+```
 
-      ```python
-      schedule, created = CrontabSchedule.objects.get_or_create(
-          minute='0',
-          hour='0',
-          day_of_week='*',
-          day_of_month='*',
-          month_of_year='*',
-          timezone=zoneinfo.ZoneInfo('Asia/Tashkent')
-      )
-      ```
+## Requirements Before Running
 
-    - If you want to **test the task every 60 seconds** (instead of daily), you can use the **interval-based schedule**
-      by uncommenting the following code:
+- **Redis**: Celery requires Redis for message brokering. Follow the
+  official [Redis installation guide](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/).
 
-      ```python
-      # schedule, interval_created = IntervalSchedule.objects.get_or_create(
-      #     every=60,
-      #     period=IntervalSchedule.SECONDS,
-      # )
-      ```
+## API Key Setup
 
-    - After uncommenting the interval-based schedule, the task will run every 60 seconds for testing purposes.
+1. **Create a `.env` file** in the root directory.
+2. **Add your API key** inside `.env`:
 
-- **Task Path**: The Celery task that fetches and saves the weather data is located in the following path:
-  ```plaintext
-  apps.weather.tasks.save_weather_data_in_db
-  ```
+   ```plaintext
+   WEATHER_API_KEY=your_api_key_here
+   ```
 
-## Run the Project
+## Install Dependencies & Migrate Database
 
-To run the project, you will need to start the following services:
+### Linux
 
-1. **Django Application** (the web server)
-2. **Redis** (the message broker for Celery)
-3. **Celery Worker** (to execute background tasks)
-4. **Celery Beat** (to schedule periodic tasks)
-5. **Flower** (optional) - For monitoring Celery tasks.
+```bash
+virtualenv -p /usr/bin/python3 .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+```
+
+### Windows
+
+```bash
+python -m venv ./venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+```
+
+### MacOS
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+```
+
+### Advanced: Using Poetry
+
+```bash
+poetry install
+poetry shell
+```
+
+</details>
+
+
+---
+
+<details>
+  <summary style="font-size: 1.5em; font-weight: bold;"><strong>Run the Project</strong></summary>
 
 ### 1. **Start Redis Server**
 
-First, make sure you have Redis installed and running. Redis is used as the message broker for Celery.
+Make sure Redis is installed and running.
 
-- **On Linux/macOS**:
-
-  You can start Redis with the following command:
-
-  ```bash
-  redis-server
-  ```
-
-- **On Windows**:
-
-  You can download and run Redis from [Redis for Windows](https://github.com/microsoftarchive/redis/releases).
+```bash
+redis-server
+```
 
 ### 2. **Start the Django Application**
 
-To run the Django app, ensure your virtual environment is activated and the required dependencies are installed. Then,
-run the Django development server:
+Ensure your virtual environment is activated, then run:
 
-This will start the Django application on `http://127.0.0.1:8000/`.
+```bash
+python manage.py runserver
+```
 
-### 3. **Start the Celery Worker**
+### 3. **Start Celery Worker**
 
-Celery is responsible for executing background tasks. To start the Celery worker, run:
+Celery is responsible for executing background tasks.
 
 ```bash
 celery -A config worker --loglevel=info
 ```
 
-or
+or in debug mode:
 
 ```bash
 celery -A config worker -l debug
@@ -448,51 +379,32 @@ celery -A config worker -l debug
 
 ### 4. **Start Celery Beat**
 
-Celery Beat is used to schedule periodic tasks. To start Celery Beat, run:
+Celery Beat is used for scheduled tasks.
 
 ```bash
 celery -A config beat --loglevel=info
 ```
 
-or
+### 5. **Optional: Start Flower**
 
-```bash
-celery -A config beat -l debug
-```
-
-This will start the scheduler and execute tasks according to the periodic schedules you’ve set (e.g., the cron job for
-fetching weather data).
-
-### 5. **Optional: Start Flower (For Monitoring Celery Tasks)**
-
-**Flower** is an optional web-based tool for monitoring and managing Celery tasks in real-time. To start Flower, run:
+For monitoring Celery tasks:
 
 ```bash
 celery -A config flower --port=5001
 ```
 
-Once Flower is running, you can access the dashboard at `http://localhost:5001/` to monitor the status of your Celery
-workers and tasks.
+Then open [Flower Dashboard](http://localhost:5001/) in your browser.
 
 ---
 
-### 6. **Django Admin Panel Authentication**
+### Summary of Commands:
 
-To access the Django admin panel, use the following credentials:
+```bash
+redis-server
+python manage.py runserver
+celery -A config worker --loglevel=info
+celery -A config beat --loglevel=info
+celery -A config flower --port=5001  # Optional
+```
 
-- **Username**: `admin`
-- **Password**: `admin123`
-
----
-
-Let me know if you'd like to adjust anything further!
-
-### Summary of Commands
-
-1. **Start Redis server**: `redis-server`
-2. **Run Django app**: `python manage.py runserver`
-3. **Start Celery Worker**: `celery -A config worker --loglevel=info`
-4. **Start Celery Beat**: `celery -A config beat --loglevel=info`
-5. **Optional: Start Flower**: `celery -A config flower --port=5555`
-
-Make sure all of these processes are running in separate terminals to keep everything working smoothly.
+</details>
