@@ -269,14 +269,6 @@ This endpoint allows users to sign in to their account and receive a token.
 
 ---
 
-## Views Methods
-
-- **`list()`**: Returns a list of weather data for all regions.
-- **`retrieve()`**: Retrieves weather data for specific regions (based on query parameters).
-- **`retrieve_multiple()`**: Retrieves weather data for multiple regions in one request.
-
----
-
 <details>
   <summary style="font-size: 1.5em; font-weight: bold;"><strong>Setup Instructions</strong></summary>
 
