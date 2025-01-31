@@ -122,150 +122,161 @@ This endpoint allows users to sign in to their account and receive a token.
 
 ## Weather Endpoints 🔗
 
+### 1. **Get All Weather Data**
+
 **GET** `/weather/`
 
-- **Description**: Retrieves a list of weather data for all available regions.
+This endpoint retrieves a list of weather data for all available regions.
 
-- **Response**:
+#### Response Format (Success - 200 OK):
 
-  ```json
-  [
-    {
-      "name": "Toshkent",
-      "country": "Uzbekistan",
-      "lat": 41.3167,
-      "lon": 69.25,
-      "temp_c": 1.1,
-      "temp_color": "#E6F7FF",
-      "wind_kph": 5.0,
-      "wind_color": "#E0F7FA",
-      "cloud": 100.0,
-      "cloud_color": "#616161"
-    },
-    {
-      "name": "City of London, Greater London",
-      "country": "United Kingdom",
-      "lat": 51.5171,
-      "lon": -0.1062,
-      "temp_c": 6.2,
-      "temp_color": "#E6F7FF",
-      "wind_kph": 9.0,
-      "wind_color": "#E0F7FA",
-      "cloud": 25.0,
-      "cloud_color": "#FFF176"
-    }
-  ]
-  ```
+```json
+[
+  {
+    "name": "Toshkent",
+    "country": "Uzbekistan",
+    "lat": 41.3167,
+    "lon": 69.25,
+    "temp_c": 1.1,
+    "temp_color": "#E6F7FF",
+    "wind_kph": 5.0,
+    "wind_color": "#E0F7FA",
+    "cloud": 100.0,
+    "cloud_color": "#616161"
+  },
+  {
+    "name": "City of London, Greater London",
+    "country": "United Kingdom",
+    "lat": 51.5171,
+    "lon": -0.1062,
+    "temp_c": 6.2,
+    "temp_color": "#E6F7FF",
+    "wind_kph": 9.0,
+    "wind_color": "#E0F7FA",
+    "cloud": 25.0,
+    "cloud_color": "#FFF176"
+  }
+]
+```
 
 ---
+
+### 2. **Retrieve Weather by Region**
 
 **GET** `/weather/retrieve/`
 
-- **Description**: Retrieves weather data for specific regions. Use the `region` query parameter to specify one or more
-  regions.
+This endpoint retrieves weather data for specific regions. Use the `region` query parameter to specify one or more
+regions.
 
-- **Query Parameter**: `region` (can be repeated to specify multiple regions)
+#### Query Parameter:
 
-- **Example Request**:
+- `region` (can be repeated to specify multiple regions)
 
-  ```bash
-  GET /weather/retrieve/?region=Tokyo&region=London
-  ```
+#### Example Request:
 
-- **Response**:
+```bash
+GET /weather/retrieve/?region=Tokyo&region=London
+```
 
-  ```json
-  [
-    {
-      "region": "Tokyo",
-      "country": "Japan",
-      "lat": 35.6895,
-      "lon": 139.6917,
-      "temp_c": 25.4,
-      "temp_color": "#FF5733",
-      "wind_kph": 15.5,
-      "wind_color": "#33FF57",
-      "cloud": 70,
-      "cloud_color": "#FF33FF"
-    },
-    {
-      "region": "London",
-      "country": "United Kingdom",
-      "lat": 51.5074,
-      "lon": -0.1278,
-      "temp_c": 16.5,
-      "temp_color": "#FFFF33",
-      "wind_kph": 10.2,
-      "wind_color": "#33FFFF",
-      "cloud": 50,
-      "cloud_color": "#FF33FF"
-    }
-  ]
-  ```
+#### Response Format (Success - 200 OK):
 
-- **Error Response**:
-
-  ```json
+```json
+[
   {
-    "status": "error",
-    "message": "Region is required"
+    "region": "Tokyo",
+    "country": "Japan",
+    "lat": 35.6895,
+    "lon": 139.6917,
+    "temp_c": 25.4,
+    "temp_color": "#FF5733",
+    "wind_kph": 15.5,
+    "wind_color": "#33FF57",
+    "cloud": 70,
+    "cloud_color": "#FF33FF"
+  },
+  {
+    "region": "London",
+    "country": "United Kingdom",
+    "lat": 51.5074,
+    "lon": -0.1278,
+    "temp_c": 16.5,
+    "temp_color": "#FFFF33",
+    "wind_kph": 10.2,
+    "wind_color": "#33FFFF",
+    "cloud": 50,
+    "cloud_color": "#FF33FF"
   }
-  ```
+]
+```
+
+#### Response Format (Error - 400 Bad Request):
+
+```json
+{
+  "status": "error",
+  "message": "Region is required"
+}
+```
 
 ---
 
+### 3. **Retrieve Weather for Multiple Regions**
+
 **POST** `/weather/retrieve-multiple/`
 
-- **Description**: Retrieves weather data for multiple regions in a single request. Pass a list of regions in the
-  request body.
+This endpoint retrieves weather data for multiple regions in a single request. Pass a list of regions in the request
+body.
 
-- **Request Body**:
+#### Request Body:
 
-  ```json
-  {
-    "regions": ["Paris", "Berlin"]
-  }
-  ```
-
-- **Response**:
-
-  ```json
-  [
-    {
-      "name": "Ile-de-France",
-      "country": "France",
-      "lat": 48.8667,
-      "lon": 2.3333,
-      "temp_c": 1.2,
-      "temp_color": "#E6F7FF",
-      "wind_kph": 7.2,
-      "wind_color": "#E0F7FA",
-      "cloud": 0,
-      "cloud_color": "#FFF9C4"
-    },
-    {
-      "name": "Berlin",
-      "country": "Germany",
-      "lat": 52.5167,
-      "lon": 13.4,
-      "temp_c": 3.0,
-      "temp_color": "#E6F7FF",
-      "wind_kph": 16.6,
-      "wind_color": "#B2EBF2",
-      "cloud": 75,
-      "cloud_color": "#9E9E9E"
-    }
+```json
+{
+  "regions": [
+    "Paris",
+    "Berlin"
   ]
-  ```
+}
+```
 
-- **Error Response**:
+#### Response Format (Success - 200 OK):
 
-  ```json
+```json
+[
   {
-    "status": "error",
-    "message": "At least one Region is required"
+    "name": "Ile-de-France",
+    "country": "France",
+    "lat": 48.8667,
+    "lon": 2.3333,
+    "temp_c": 1.2,
+    "temp_color": "#E6F7FF",
+    "wind_kph": 7.2,
+    "wind_color": "#E0F7FA",
+    "cloud": 0,
+    "cloud_color": "#FFF9C4"
+  },
+  {
+    "name": "Berlin",
+    "country": "Germany",
+    "lat": 52.5167,
+    "lon": 13.4,
+    "temp_c": 3.0,
+    "temp_color": "#E6F7FF",
+    "wind_kph": 16.6,
+    "wind_color": "#B2EBF2",
+    "cloud": 75,
+    "cloud_color": "#9E9E9E"
   }
-  ```
+]
+```
+
+#### Response Format (Error - 400 Bad Request):
+
+```json
+{
+  "status": "error",
+  "message": "At least one region is required"
+}
+```
 
 ---
 
