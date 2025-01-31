@@ -464,12 +464,23 @@ workers and tasks.
 
 ---
 
+### 6. **Django Admin Panel Authentication**
+
+To access the Django admin panel, use the following credentials:
+
+- **Username**: `admin`
+- **Password**: `admin123`
+
+---
+
+Let me know if you'd like to adjust anything further!
+
 ### Summary of Commands
 
 1. **Start Redis server**: `redis-server`
 2. **Run Django app**: `python manage.py runserver`
-3. **Start Celery Worker**: `celery -A Weather-API worker --loglevel=info`
-4. **Start Celery Beat**: `celery -A Weather-API beat --loglevel=info`
-5. **Optional: Start Flower**: `celery -A Weather-API flower --port=5555`
+3. **Start Celery Worker**: `celery -A config worker --loglevel=info`
+4. **Start Celery Beat**: `celery -A config beat --loglevel=info`
+5. **Optional: Start Flower**: `celery -A config flower --port=5555`
 
 Make sure all of these processes are running in separate terminals to keep everything working smoothly.
