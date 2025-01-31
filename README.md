@@ -17,7 +17,7 @@ weather data for various countries. **Flower** is also used for monitoring Celer
 
 ---
 
-## Production Release
+## Production Release 🌍
 
 ### Project URL
 
@@ -34,7 +34,7 @@ To access the Django admin panel, use:
 
 ---
 
-## User Authentication Endpoints
+## User Authentication Endpoints 🔗
 
 ### 1. **Sign Up**
 
@@ -120,7 +120,7 @@ This endpoint allows users to sign in to their account and receive a token.
 
 ---
 
-## Weather Endpoints
+## Weather Endpoints 🔗
 
 **GET** `/weather/`
 
@@ -270,7 +270,7 @@ This endpoint allows users to sign in to their account and receive a token.
 ---
 
 <details>
-  <summary style="font-size: 1.5em; font-weight: bold;"><strong>Setup Instructions</strong></summary>
+  <summary style="font-size: 1.5em; font-weight: bold;"><strong>Setup Instructions ⚙️️</strong></summary>
 
 ## Clone Project
 
@@ -337,7 +337,7 @@ poetry shell
 ---
 
 <details>
-  <summary style="font-size: 1.5em; font-weight: bold;"><strong>Run the Project</strong></summary>
+  <summary style="font-size: 1.5em; font-weight: bold;"><strong>Run the Project 🚀</strong></summary>
 
 ### 1. **Start Redis Server**
 
