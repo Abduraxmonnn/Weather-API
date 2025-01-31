@@ -24,7 +24,7 @@ periodic_task, periodic_created = PeriodicTask.objects.get_or_create(
     name='Send weather notify every start of the day',
     defaults={
         'interval': schedule,
-        'task': 'datagaze_api.apps.weather.tasks.save_weather_data_in_db',
+        'task': 'weather.tasks.save_weather_data_in_db',
     }
 )
 
