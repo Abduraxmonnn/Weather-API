@@ -8,3 +8,4 @@ python-dotenv==1.0.1
 redis==5.0.3
 requests==2.32.3
 uuid==1.30
+django-debug-toolbar==5.0.1
