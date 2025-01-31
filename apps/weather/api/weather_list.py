@@ -51,16 +51,18 @@ class WeatherListViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         try:
-            region = request.query_params.get('region')  # getlist() to get several params with same name
-            if not region:
+            regions = request.query_params.getlist('region')  # getlist() to get several params with same name
+            if not regions:
                 return Response({
                     "status": "error",
                     "message": "Region is required",
                 }, status=status.HTTP_400_BAD_REQUEST)
 
-            source_data = get_weather_data_service(region=region)
+            response = []
+            for region in regions:
+                response.append(get_weather_data_service(region=region))
 
-            return Response(source_data, status=status.HTTP_200_OK)
+            return Response(response, status=status.HTTP_200_OK)
 
         except CityWeather.DoesNotExist:
             return Response({
